@@ -1,0 +1,289 @@
+#!/usr/bin/python
+"""
+To run Python file, import Bio and open idle from command line:
+$cd /Documents/biopython-1.63
+$import Bio
+$idle
+Open this file in idle, and run by pressing F5
+This allows Biopython imports to work
+
+V38 GOAL: Add Forward Search
+"""
+
+import sys
+sys.path.insert(0,'.')
+import os
+from Bio import AbiTracer
+from Bio.Seq import Seq
+
+# Set working directory
+if len(sys.argv) > 1:
+    file_location = sys.argv[1]
+else:
+    file_location = "/home/bulgerda/Desktop/Seq5_30/"
+
+#os.chdir(file_location)
+
+# File Name
+files = os.listdir(file_location)
+files.sort()
+
+# gk mutations (TODO: eventually convert into separate file)
+gk1 = "gk748865"
+gk748865 = Seq("ctgcgtcgccacatagtacgC".upper())
+gk748865r = gk748865.reverse_complement()
+gkm1 = "T"
+gkm1r = "A"
+
+gk2 = "gk660898"
+gk660898 = Seq("ccagcttccgggtaaaggttC".upper())
+gk660898r = gk660898.reverse_complement()
+gkm2 = "T"
+gkm2r = "A"
+
+gk3 = "gk169914"
+gk169914 = Seq("caatcttgacagtctcatccC".upper())
+gk169914r = gk169914.reverse_complement()
+gkm3 = "T"
+gkm3r = "A"
+
+gk4 = "gk169915"
+gk169915 = Seq("atttatcatgcaattacgtgC".upper())
+gk169915r = gk169915.reverse_complement()
+gkm4 = "T"
+gkm4r = "A"
+
+gk5 = "gk828902"
+gk828902 = Seq("gtgtaatgcttcaaatttcgT".upper())
+gk828902r = gk828902.reverse_complement()
+gkm5 = "C"
+gkm5r = "G"
+
+gk6 = "gk606297"
+gk606297 = Seq("taaaatcaaaaagacgagaaG".upper())
+gk606297r = gk606297.reverse_complement()
+gkm6 = "A"
+gkm6r = "T"
+
+gk7 = "gk407256"
+gk407256 = Seq("ttaccgctgctgcttaagccT".upper())
+gk407256r = gk407256.reverse_complement()
+gkm7 = "C"
+gkm7r = "G"
+
+gk8 = "gk680522"
+gk680522 = Seq("attgcggcttaatatcccacG".upper())
+gk680522r = gk680522.reverse_complement()
+gkm8 = "A"
+gkm8r = "T"
+
+gk9 = "gk402833"
+gk402833 = Seq("ccaaaattttgtgtcgtctcC".upper())
+gk402833r = gk402833.reverse_complement()
+gkm9 = "T"
+gkm9r = "A"
+
+gk10 = "gk169977"
+gk169977 = Seq("cgacgagcagctcgggccgaG".upper())
+gk169977r = gk169977.reverse_complement()
+gkm10 = "A"
+gkm10r = "T"
+
+gk11 = "gk808587"
+gk808587 = Seq("ccaacgtcggaggatcaggcG".upper())
+gk808587r = gk808587.reverse_complement()
+gkm11 = "A"
+gkm11r = "T"
+
+# 7 Amplicon-5 Alleles
+gk12 = "gk169945"
+gk169945 = Seq("ctccaaataatgacactttgA".upper())
+gk169945r = gk169945.reverse_complement()
+gkm12 = "G"
+gkm12r = "C"
+
+gk13 = "gk617200"
+gk617200 = Seq("actctgaactctttcgacacC".upper())
+gk617200r = gk617200.reverse_complement()
+gkm13 = "T"
+gkm13r = "A"
+
+gk14 = "gk595034"
+gk595034 = Seq("ttctttcgttggaagaagacG".upper())
+gk595034r = gk595034.reverse_complement()
+gkm14 = "A"
+gkm14r = "T"
+
+gk15 = "gk169944"
+gk169944 = Seq("ataaccatcgggacatttatC".upper())
+gk169944r = gk169944.reverse_complement()
+gkm15 = "T"
+gkm15r = "A"
+
+gk16 = "gk745372"
+gk745372 = Seq("gccaacgcattttcggcattC".upper())
+gk745372r = gk745372.reverse_complement()
+gkm16 = "T"
+gkm16r = "A"
+
+gk17 = "gk899879"
+gk899879 = Seq("aatattgcatagcctgatcgC".upper())
+gk899879r = gk899879.reverse_complement()
+gkm17 = "T"
+gkm17r = "A"
+
+gk18 = "gk379607"
+gk379607 = Seq("caggtagccggtgatcgtgtG".upper())
+gk379607r = gk379607.reverse_complement()
+gkm18 = "A"
+gkm18r = "T"
+
+# 2 Amplicon 4 Alleles
+#MMP Allele
+gk19 = "gk819989"
+gk819989 = Seq("tacaccaccatttcgaattaC".upper())
+gk819989r = gk819989.reverse_complement()
+gkm19 = "T"
+gkm19r = "A"
+
+# DAF-2 Null Allele m631
+gk20 = "m631"
+m631 = Seq("tatccgtacaccaccatttcG".upper())
+m631r = m631.reverse_complement()
+gkm20 = "A"
+gkm20r = "T"
+
+gkid = gk1,gk2,gk3,gk4,gk5,gk6,gk7,gk8,gk9,gk10,gk11,gk12,gk13,gk14,gk15,gk16,gk17,gk18,gk19,gk20                
+gk = gk748865,gk660898,gk169914,gk169915,gk828902,gk606297,gk407256,gk680522,gk402833,gk169977,gk808587,gk169945,gk617200,gk595034,gk169944,gk745372,gk899879,gk379607,gk819989,m631
+gkr = gk748865r,gk660898r,gk169914r,gk169915r,gk828902r,gk606297r,gk407256r,gk680522r,gk402833r,gk169977r,gk808587r,gk169945r,gk617200r,gk595034r,gk169944r,gk745372r,gk899879r,gk379607r,gk819989r,m631r
+gkm = gkm1,gkm2,gkm3,gkm4,gkm5,gkm6,gkm7,gkm8,gkm9,gkm10,gkm11,gkm12,gkm13,gkm14,gkm15,gkm16,gkm17,gkm18,gkm19,gkm20 
+gkmr = gkm1r,gkm2r,gkm3r,gkm4r,gkm5r,gkm6r,gkm7r,gkm8r,gkm9r,gkm10r,gkm11r,gkm12r,gkm13r,gkm14r,gkm15r,gkm16r,gkm17r,gkm18r,gkm19r,gkm20r
+
+#Definition for Detailed Outputs
+#Forward
+def print_details(file_name,data1,data2,data3,data4,phd,WTf,lgkf,gkf,fwo,pos):
+    gkbp = seq[lgkf:lgkf+21]           #Sequence 20 bp+mutation
+    gkF = gkbp[0:19]                    #20bp before mutation
+    gkM = gkbp[20]                #Mutation with marker
+    i = lgkf+20
+    values = data1[pos[i]],data2[pos[i]],data3[pos[i]],data4[pos[i]]
+    valueAv = sum(values)/len(values)
+    m=-1
+    WT = None
+    MT = None
+    for j in values:
+        m+=1
+        if j >= valueAv:
+            if fwo[m] is WTf:
+                WT = '1'
+            elif fwo[m] is gkm[n]:
+                MT = '1'
+            else:
+                continue
+    if WT == '1' and MT == None:
+        note = "+/+"
+    elif WT == '1' and MT == '1':
+        note= "m/+"
+    elif WT == None and MT == '1':
+        note = "m/m"
+    elif WT == None and MT == None:
+        note = "Mutation not found"                
+    print "\t\t"+gkid[n]+"  "+note+"\tG is "+str(data1[pos[i]])+  "   \tN2: "+WTf+"\tQS: "+str(phd[i])+"\t"+gkM+" "+gkF
+    print "\t\t\t\tA is "+str(data2[pos[i]])+                   "   \tM:  "+gkm[n]
+    print "\t\t\t\tT is "+str(data3[pos[i]])
+    print "\t\t\t\tC is "+str(data4[pos[i]])
+    print "------------------------------------------------------------------------------------------------"
+    return
+    
+#Reverse
+def print_rdetails(file_name,data1,data2,data3,data4,phd,WTrF,lgkrF,fwo):
+    gkbp = seq[lgkrF-1:lgkrF+20]           #Sequence 20 bp+mutation
+    gkF = gkbp[1:21]                    #20bp before mutation
+    gkM = gkbp[0]                #Mutation with marker
+    i = lgkrF-1
+    values = data1[pos[i]],data2[pos[i]],data3[pos[i]],data4[pos[i]]
+    valueAv = sum(values)/len(values)
+    #print valueAv
+    m=-1
+    WT = None
+    MT = None
+    for j in values:
+        m+=1
+        if j >= valueAv*3/4:
+            if fwo[m] is WTrF:
+                WT = '1'
+            elif fwo[m] is gkmr[n]:
+                MT = '1'
+            else:
+                continue
+    if WT == '1' and MT == None:
+        note = "+/+"
+    elif WT == '1' and MT == '1':
+        note= "m/+"
+    elif WT == None and MT == '1':
+        note = "m/m"
+    elif WT == None and MT == None:
+        note = "Mutation not found"                
+    print "\t\t"+gkid[n]+"  "+note+"\tG is "+str(data1[pos[i]])+  "   \tN2: "+WTrF+"\tQS: "+str(phd[i])+"\t"+gkM+" "+gkF
+    print "\t\t\t\tA is "+str(data2[pos[i]])+                   "   \tM:  "+gkmr[n]
+    print "\t\t\t\tT is "+str(data3[pos[i]])
+    print "\t\t\t\tC is "+str(data4[pos[i]])
+    print "------------------------------------------------------------------------------------------------"
+
+# Header
+print "File Name\tAllele\t  */*\tEvaluation\tKey\tQS\tMutation Site + 20 bp"
+print "________________________________________________________________________________________________"
+
+# for loop in order to batch process files
+for shortfn in files:
+    # Import file
+    fn = os.path.join(file_location, shortfn)
+    for record in AbiTracer.AbiIterator(fn):
+        file_name = record.name         #File name
+        seq = Seq(record.seq)           #Sequence
+        rseq = seq.reverse_complement() #Reverse compliment of seq
+        phd = list(record.phd)          #Quality score converted to list
+        phdr = phd[::-1]                #Reverse phd list
+        fwo = record.FWO                #Filter Wheel Order = base order
+        data1 = record.DATA1            # fwo[0] = G
+        data2 = record.DATA2            # fwo[1] = A
+        data3 = record.DATA3            # fwo[2] = T
+        data4 = record.DATA4            # fwo[3] = C
+        data4r = data4[::-1]
+        pos = record.POS                #Base positions in trace files
+        posr = pos[::-1]                #Reverse base positions
+    print file_name
+
+    # gk loop in order to batch process all mutations
+    n = -1
+    for gkn in gk:
+        n+=1 # counter
+        
+        # Query sequence variables
+        gkf = gkn[0:19] # million mutation project gk allele forward sequence 25 bp before mutation
+        WTf = gkn[20]   # wild type nucleotide at mutation site
+
+        # Find sequence
+        lgkf = seq.find(gkf)  # lgkf = location of gkf in input file str1
+        lgkr = rseq.find(gkf) # lgkr = location of gkr in input file str1
+
+        # Display results
+        if lgkf >= 0:
+            print_details(file_name,data1,data2,data3,data4,phd,WTf,lgkf,gkf,fwo,pos)
+            continue
+        elif lgkr >= 0:
+            gkr_ = gkr[n]
+            gkrF = gkr_[1:20]
+            WTrF = gkr_[0]
+            lgkrF = seq.find(gkrF)
+            if lgkrF >= 0:
+                print_rdetails(file_name,data1,data2,data3,data4,phd,WTrF,lgkrF,fwo)
+                continue
+            continue
+        else:
+            continue
+    # Space output between files
+    print "________________________________________________________________________________________________\n"
+
+
+    
