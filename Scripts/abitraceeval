@@ -238,20 +238,24 @@ print "_________________________________________________________________________
 for shortfn in files:
     # Import file
     fn = os.path.join(file_location, shortfn)
-    for record in AbiTracer.AbiIterator(fn):
-        file_name = record.name         #File name
-        seq = Seq(record.seq)           #Sequence
-        rseq = seq.reverse_complement() #Reverse compliment of seq
-        phd = list(record.phd)          #Quality score converted to list
-        phdr = phd[::-1]                #Reverse phd list
-        fwo = record.FWO                #Filter Wheel Order = base order
-        data1 = record.DATA1            # fwo[0] = G
-        data2 = record.DATA2            # fwo[1] = A
-        data3 = record.DATA3            # fwo[2] = T
-        data4 = record.DATA4            # fwo[3] = C
-        data4r = data4[::-1]
-        pos = record.POS                #Base positions in trace files
-        posr = pos[::-1]                #Reverse base positions
+    try:
+        for record in AbiTracer.AbiIterator(fn):
+            file_name = record.name         #File name
+            seq = Seq(record.seq)           #Sequence
+            rseq = seq.reverse_complement() #Reverse compliment of seq
+            phd = list(record.phd)          #Quality score converted to list
+            phdr = phd[::-1]                #Reverse phd list
+            fwo = record.FWO                #Filter Wheel Order = base order
+            data1 = record.DATA1            # fwo[0] = G
+            data2 = record.DATA2            # fwo[1] = A
+            data3 = record.DATA3            # fwo[2] = T
+            data4 = record.DATA4            # fwo[3] = C
+            data4r = data4[::-1]
+            pos = record.POS                #Base positions in trace files
+            posr = pos[::-1]                #Reverse base positions
+    except AbiTracer.ABIVersionError, e:
+        print 'error', e, fn
+#        continue
     print file_name
 
     # gk loop in order to batch process all mutations
