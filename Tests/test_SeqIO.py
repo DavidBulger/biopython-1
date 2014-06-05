@@ -223,6 +223,7 @@ test_files = [
     ("abi", False, 'Abi/310.ab1', 1),
     ("abi", False, 'Abi/3100.ab1', 1),
     ("abi", False, 'Abi/3730.ab1', 1),
+    ("abi", False, 'Abi/A6_1-DB3.ab1', 1),
     ]
 
 
